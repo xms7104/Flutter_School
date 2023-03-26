@@ -50,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Image.asset('/images/Image_Logo02.png'),
                 )),
             Expanded(
-              flex: 5,
+              flex: 4,
               child: ListView(
                 physics: const AlwaysScrollableScrollPhysics(),
                 // This next line does the trick.
@@ -67,100 +67,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
-            Expanded(
+            const Expanded(
               flex: 10,
-              child: SingleChildScrollView(
-              child: IntrinsicHeight(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                  Expanded(
-                child: SizedBox(
-                        child: IntrinsicHeight(
-                            child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                          Expanded(
-                              child: SizedBox(
-                                  child: Column(
-                            children: [
-                              TextButton(
-                                onPressed: () => {},
-                                style: TextButton.styleFrom(
-                                    side: const BorderSide(
-                                        width: 0, color: Colors.white),
-                                    foregroundColor:
-                                        const Color.fromARGB(255, 0, 0, 0),
-                                    minimumSize: const Size(100, 50)),
-                                child: const Text('女裝'),
-                              ),
-                              SizedBox(
-                                  child: womanListState
-                                      ? womanListMobile(womanListState)
-                                      : const ListMobile())
-                            ],
-                          ))
-                          
-                          ),
-                        ])))),
-           Expanded(
-                child: SizedBox(
-                    child: IntrinsicHeight(
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                      Expanded(
-                          child: SizedBox(
-                              child: Column(
-                        children: [
-                          TextButton(
-                            onPressed: () => {},
-                            style: TextButton.styleFrom(
-                                side: const BorderSide(
-                                    width: 0, color: Colors.white),
-                                foregroundColor:
-                                    const Color.fromARGB(255, 0, 0, 0),
-                                minimumSize: const Size(100, 50)),
-                            child: const Text('男裝'),
-                          ),
-                          SizedBox(
-                              child: manListState
-                                  ? manListMobile(manListState)
-                                  : const ListMobile())
-                            ],
-                          ))),
-                        ])))),
-           Expanded(
-                child: SizedBox(
-                    child: IntrinsicHeight(
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                      Expanded(
-                          child: SizedBox(
-                              child: Column(
-                        children: [
-                          TextButton(
-                            onPressed: () => {},
-                            style: TextButton.styleFrom(
-                                side: const BorderSide(
-                                    width: 0, color: Colors.white),
-                                foregroundColor:
-                                    const Color.fromARGB(255, 0, 0, 0),
-                                minimumSize: const Size(100, 50)),
-                            child: const Text('配件'),
-                          ),
-                          SizedBox(
-                              child: accessoriesListState
-                                  ? accessoriesListMobile(accessoriesListState)
-                                  : const ListMobile())
-                            ],
-                          ))),
-                        ])))),
-                ]),
-              ),
-              
-            )
+              child: Expanded(
+                flex: 10,
+                child: Steps())
             ),
             
 
@@ -250,9 +161,10 @@ class _MyHomePageState extends State<MyHomePage> {
                                         height: 120,
                                         scale: 2.0,
                                       ),
-                                     const SizedBox(width: 30,),
+                                      const SizedBox( width: 30,),
                                       Column(
-                                        crossAxisAlignment:CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
                                         children: const [
                                           Text(
                                             'UNIQLO 特級極輕羽絨外套',
@@ -292,9 +204,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                         height: 120,
                                         scale: 2.0,
                                       ),
-                                     const SizedBox(width: 30,),
+                                      const SizedBox( width: 30,),
                                       Column(
-                                        crossAxisAlignment:CrossAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: const [
                                           Text(
                                             'UNIQLO 特級極輕羽絨外套',
@@ -334,9 +246,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                         height: 120,
                                         scale: 2.0,
                                       ),
-                                      const SizedBox(width: 30,),
+                                      const SizedBox( width: 30,),
                                       Column(
-                                        crossAxisAlignment:CrossAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: const [
                                           Text(
                                             'UNIQLO 特級極輕羽絨外套',
@@ -372,191 +284,156 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-class womanListMobile extends StatelessWidget {
-  final bool womanListState;
-
-  const womanListMobile(this.womanListState, {super.key});
-  @override
-  Widget build(BuildContext context) {
-    if (womanListState) {
-      return IntrinsicHeight(
-        child: Column(children: [
-          Expanded(
-            child: Column(
-              children: List.generate(8, (index) {
-                return Container(
-                    padding: const EdgeInsets.all(8),
-                    child: OutlinedButton(
-                      onPressed: () => Null,
-                      style: OutlinedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16.0),
-                          ),
-                          side: const BorderSide(
-                              width: 1.0, color: Colors.black)),
-                      child: Row(children: [
-                        Image.asset(
-                          '/images/0322img.jpg',
-                          width: 60,
-                          height: 120,
-                          scale: 2.0,
-                        ),
-                        const SizedBox(width: 30),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: const [
-                            Text('UNIQLO 特級極輕羽絨外套',
-                                style: TextStyle(color: Colors.black)),
-                            Text('NT 322',
-                                style: TextStyle(color: Colors.black)),
-                          ],
-                        )
-                      ]),
-                    ));
-              }),
-            ),
-          )
-        ]),
-      );
-    } else {
-      return const Visibility(
-          visible: false,
-          maintainAnimation: false,
-          maintainSize: false,
-          maintainState: false,
-          child: Text(''));
-    }
-  }
+class Step {
+  Step(
+    this.title,
+    [this.isExpanded = false]
+  );
+  String title;
+  bool isExpanded;
 }
 
-class manListMobile extends StatelessWidget {
-  final bool manListState;
-
-  const manListMobile(this.manListState, {super.key});
-  @override
-  Widget build(BuildContext context) {
-    // print(_counter);
-    if (manListState) {
-      return IntrinsicHeight(
-        child: Column(children: [
-          Expanded(
-            child: Column(
-              children: List.generate(8, (index) {
-                return Container(
-                    padding: const EdgeInsets.all(8),
-                    child: OutlinedButton(
-                      onPressed: () => Null,
-                      style: OutlinedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16.0),
-                          ),
-                          side: const BorderSide(
-                              width: 1.0, color: Colors.black)),
-                      child: Row(children: [
-                        Image.asset(
-                          '/images/0322img.jpg',
-                          width: 60,
-                          height: 120,
-                          scale: 2.0,
-                        ),
-                        const SizedBox(width: 30),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: const [
-                            Text('UNIQLO 特級極輕羽絨外套',
-                                style: TextStyle(color: Colors.black)),
-                            Text('NT 322',
-                                style: TextStyle(color: Colors.black)),
-                          ],
-                        )
-                      ]),
-                    ));
-              }),
-            ),
-          )
-        ]),
-      );
-    } else {
-      return const Visibility(
-          visible: false,
-          maintainAnimation: false,
-          maintainSize: false,
-          maintainState: false,
-          child: Text(''));
-    }
-  }
+List<Step> getSteps() {
+  return [
+    Step('女裝'),
+    Step('男裝'),
+    Step('配件'),
+  ];
 }
 
-class accessoriesListMobile extends StatelessWidget {
-  final bool accessoriesListState;
-
-  const accessoriesListMobile(this.accessoriesListState, {super.key});
+class Steps extends StatefulWidget {
+  const Steps({Key? key}) : super(key: key);
   @override
-  Widget build(BuildContext context) {
-    // print(_counter);
-    if (accessoriesListState) {
-      return IntrinsicHeight(
-        child: Column(children: [
-          Expanded(
-            child: Column(
-              children: List.generate(8, (index) {
-                return Container(
-                    padding: const EdgeInsets.all(8),
-                    child: OutlinedButton(
-                      style: OutlinedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16.0),
-                          ),
-                          side: const BorderSide(
-                              width: 1.0, color: Colors.black)),
-                      onPressed: () => Null,
-                      child: Row(children: [
-                        Image.asset(
-                          '/images/0322img.jpg',
-                          width: 60,
-                          height: 120,
-                          scale: 2.0,
-                        ),
-                        const SizedBox(width: 30),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: const [
-                            Text('UNIQLO 特級極輕羽絨外套',
-                                style: TextStyle(color: Colors.black)),
-                            Text('NT 322',
-                                style: TextStyle(color: Colors.black)),
-                          ],
-                        )
-                      ]),
-                    ));
-              }),
-            ),
-          )
-        ]),
-      );
-    } else {
-      return const Visibility(
-          visible: false,
-          maintainAnimation: false,
-          maintainSize: false,
-          maintainState: false,
-          child: Text(''));
-    }
-  }
+  State<Steps> createState() => _StepsState();
 }
 
-class ListMobile extends StatelessWidget {
-  const ListMobile({super.key});
+class _StepsState extends State<Steps> {
+  final List<Step> _steps = getSteps();
   @override
   Widget build(BuildContext context) {
-    // print(_counter);
-    return const SizedBox(
-        child: Visibility(
-      visible: false,
-      child: Text(''),
-    ));
+    return SingleChildScrollView(
+      child: Container(
+        child: _renderSteps(),
+      ),
+    );
+  }
+  Widget _renderSteps() {
+    return ExpansionPanelList(
+      expansionCallback: (int index, bool isExpanded) {
+        setState(() {
+          _steps[index].isExpanded = !isExpanded;
+        });
+      },
+      children: _steps.map<ExpansionPanel>((Step step) {
+        return ExpansionPanel(
+          
+          headerBuilder: (BuildContext context, bool isExpanded) {
+            return 
+            ListTile(
+              textColor: Colors.black,
+              title: Text(step.title),
+            );
+          },
+          body: 
+          Column(children: [
+          ListTile(
+            shape: RoundedRectangleBorder(
+            side: const BorderSide(width: 2, color: Colors.black),
+            borderRadius: BorderRadius.circular(10),
+          ),
+           leading: Image.asset('/images/0322img.jpg'),
+              title: const Text('UNIQLO 特級極輕羽絨外套'),
+              subtitle: const Text('NT 322') ,
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          ListTile(
+            shape: RoundedRectangleBorder(
+            side: const BorderSide(width: 2, color: Colors.black),
+            borderRadius: BorderRadius.circular(10),),
+           leading: Image.asset('/images/0322img.jpg'),
+              title: const Text('UNIQLO 特級極輕羽絨外套'),
+              subtitle: const Text('NT 322') ,
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          ListTile(
+            shape: RoundedRectangleBorder(
+            side: const BorderSide(width: 2, color: Colors.black),
+            borderRadius: BorderRadius.circular(10),
+          ),
+           leading: Image.asset('/images/0322img.jpg'),
+              title: const Text('UNIQLO 特級極輕羽絨外套'),
+              subtitle: const Text('NT 322') ,
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          ListTile(
+            shape: RoundedRectangleBorder(
+            side: const BorderSide(width: 2, color: Colors.black),
+            borderRadius: BorderRadius.circular(10),
+          ),
+           leading: Image.asset('/images/0322img.jpg'),
+              title: const Text('UNIQLO 特級極輕羽絨外套'),
+              subtitle: const Text('NT 322') ,
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          ListTile(
+            shape: RoundedRectangleBorder(
+            side: const BorderSide(width: 2, color: Colors.black),
+            borderRadius: BorderRadius.circular(10),
+          ),
+           leading: Image.asset('/images/0322img.jpg'),
+              title: const Text('UNIQLO 特級極輕羽絨外套'),
+              subtitle: const Text('NT 322') ,
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          ListTile(
+            shape: RoundedRectangleBorder(
+            side: const BorderSide(width: 2, color: Colors.black),
+            borderRadius: BorderRadius.circular(10),
+          ),
+           leading: Image.asset('/images/0322img.jpg'),
+              title: const Text('UNIQLO 特級極輕羽絨外套'),
+              subtitle: const Text('NT 322') ,
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+         ListTile(
+            shape: RoundedRectangleBorder(
+            side: const BorderSide(width: 2, color: Colors.black),
+            borderRadius: BorderRadius.circular(10),
+          ),
+           leading: Image.asset('/images/0322img.jpg'),
+              title: const Text('UNIQLO 特級極輕羽絨外套'),
+              subtitle: const Text('NT 322') ,
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          ListTile(
+            shape: RoundedRectangleBorder(
+            side: const BorderSide(width: 2, color: Colors.black),
+            borderRadius: BorderRadius.circular(10),
+          ),
+           leading: Image.asset('/images/0322img.jpg'),
+              title: const Text('UNIQLO 特級極輕羽絨外套'),
+              subtitle: const Text('NT 322') ,
+          )
+          ],),
+          
+          
+          isExpanded: step.isExpanded,
+        );
+      }).toList(),
+    );
   }
 }
