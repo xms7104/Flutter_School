@@ -1,6 +1,7 @@
 // ignore_for_file: camel_case_types
 
 import 'package:flutter/material.dart';
+import './productHome.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,51 +33,51 @@ class _MyHomePageState extends State<MyHomePage> {
   bool womanListState = true;
   bool manListState = true;
   bool accessoriesListState = true;
+  final String productId = '123456';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(body: LayoutBuilder(builder: (context, constraints) {
-      if (constraints.maxWidth < 450) {
-        return Container(
-            child: Column(
+      if (constraints.maxWidth <= 600) {
+        return Column(
           children: <Widget>[
-            Expanded(
-                flex: 1,
-                child: Container(
-                  alignment: Alignment.center,
-                  width: MediaQuery.of(context).size.width,
-                  margin: const EdgeInsets.all(8.0),
-                  color: Colors.white,
-                  child: Image.asset('/images/Image_Logo02.png'),
-                )),
-            Expanded(
-              flex: 4,
-              child: ListView(
-                physics: const AlwaysScrollableScrollPhysics(),
-                // This next line does the trick.
-                scrollDirection: Axis.horizontal,
-                children: List.generate(
-                  8,
-                  (index) {
-                    return Container(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: Image.asset('/images/0322title.jpg')));
-                  },
-                ),
-              ),
+        Expanded(
+            flex: 1,
+            child: Container(
+              alignment: Alignment.center,
+              width: MediaQuery.of(context).size.width,
+              margin: const EdgeInsets.all(8.0),
+              color: Colors.white,
+              child: Image.asset('/images/Image_Logo02.png'),
+            )),
+        Expanded(
+          flex: 4,
+          child: ListView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            // This next line does the trick.
+            scrollDirection: Axis.horizontal,
+            children: List.generate(
+              8,
+              (index) {
+                return Container(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Image.asset('/images/0322title.jpg')));
+              },
             ),
-            const Expanded(
-              flex: 10,
-              child: Expanded(
-                flex: 10,
-                child: Steps())
-            ),
-            
+          ),
+        ),
+        const Expanded(
+          flex: 10,
+          child: Expanded(
+            flex: 10,
+            child: Steps())
+        ),
+        
 
           ],
-        ));
+        );
       } else {
         return Center(
           child: Column(
@@ -153,7 +154,14 @@ class _MyHomePageState extends State<MyHomePage> {
                               return Container(
                                   padding: const EdgeInsets.all(8),
                                   child: OutlinedButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                       Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => const ProductHome(),
+                                        ),
+                                      );
+                                    },
                                     child: Row(children: [
                                       Image.asset(
                                         '/images/0322img.jpg',
