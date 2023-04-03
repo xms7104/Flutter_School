@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './ProductInformation.dart';
 import './informationBottom.dart';
+import './main.dart';
 
 void main() {
   runApp(const ProductHome());
@@ -41,10 +42,37 @@ class _ProductHomePageState extends State<ProductHomePage> {
       screenHeight = 2.2;
       productFlex = 2;
     }
-    return Scaffold(
+    return Theme(
+      data: ThemeData(
+        appBarTheme: AppBarTheme(
+          color: Colors.white,
+          elevation: 0, // 将阴影去掉，以使AppBar看起来更平面
+        ),
+      ),
+      child: Scaffold(
       resizeToAvoidBottomInset : false,
       appBar: AppBar(
-        title: Text(''),
+        title: 
+         Center(
+          child:OutlinedButton(
+            style: ButtonStyle(
+              side: MaterialStateProperty.resolveWith<BorderSide>(
+                (Set<MaterialState> states) {
+                  return BorderSide.none;
+                },
+              ),
+            ),
+            onPressed: () { 
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const MyApp(),
+              ),
+            );},
+          child: 
+          Image.asset('./images/Image_Logo02.png',width: 200,))
+         )
+        
       ),
       body: 
       Padding(padding: const EdgeInsets.all(16.0),
@@ -84,6 +112,6 @@ class _ProductHomePageState extends State<ProductHomePage> {
     ),
     ),
     )
-    );
+    ));
   }
 }
