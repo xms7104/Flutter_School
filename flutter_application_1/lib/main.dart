@@ -155,14 +155,15 @@ class _MyHomePageState extends State<MyHomePage> {
                                   padding: const EdgeInsets.all(8),
                                   child: OutlinedButton(
                                     onPressed: () {
-                                       Navigator.push(
+                                      Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) => const ProductHome(),
                                         ),
                                       );
                                     },
-                                    child: Row(children: [
+                                    child: Row(
+                                      children: [
                                       Image.asset(
                                         '/images/0322img.jpg',
                                         width: 60,
@@ -171,8 +172,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                       ),
                                       const SizedBox( width: 30,),
                                       Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: const [
                                           Text(
                                             'UNIQLO 特級極輕羽絨外套',
@@ -204,7 +204,14 @@ class _MyHomePageState extends State<MyHomePage> {
                               return Container(
                                   padding: const EdgeInsets.all(8),
                                   child: OutlinedButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => const ProductHome(),
+                                        ),
+                                      );
+                                    },
                                     child: Row(children: [
                                       Image.asset(
                                         '/images/0322img.jpg',
@@ -246,7 +253,14 @@ class _MyHomePageState extends State<MyHomePage> {
                               return Container(
                                   padding: const EdgeInsets.all(8),
                                   child: OutlinedButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => const ProductHome(),
+                                        ),
+                                      );
+                                    },
                                     child: Row(children: [
                                       Image.asset(
                                         '/images/0322img.jpg',
@@ -344,7 +358,22 @@ class _StepsState extends State<Steps> {
           },
           body: 
           Column(children: [
-          ListTile(
+            OutlinedButton(
+              style: ButtonStyle(
+              side: MaterialStateProperty.resolveWith<BorderSide>(
+                (Set<MaterialState> states) {
+                  return BorderSide.none;
+                },
+              ),
+            ),
+              onPressed:(){
+               Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ProductHome(),
+                ),
+              );
+            } , child:ListTile(
             shape: RoundedRectangleBorder(
             side: const BorderSide(width: 2, color: Colors.black),
             borderRadius: BorderRadius.circular(10),
@@ -352,34 +381,28 @@ class _StepsState extends State<Steps> {
            leading: Image.asset('/images/0322img.jpg'),
               title: const Text('UNIQLO 特級極輕羽絨外套'),
               subtitle: const Text('NT 322') ,
-          ),
+          )),
+
           const SizedBox(
             height: 10,
           ),
-          ListTile(
-            shape: RoundedRectangleBorder(
-            side: const BorderSide(width: 2, color: Colors.black),
-            borderRadius: BorderRadius.circular(10),),
-           leading: Image.asset('/images/0322img.jpg'),
-              title: const Text('UNIQLO 特級極輕羽絨外套'),
-              subtitle: const Text('NT 322') ,
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          ListTile(
-            shape: RoundedRectangleBorder(
-            side: const BorderSide(width: 2, color: Colors.black),
-            borderRadius: BorderRadius.circular(10),
-          ),
-           leading: Image.asset('/images/0322img.jpg'),
-              title: const Text('UNIQLO 特級極輕羽絨外套'),
-              subtitle: const Text('NT 322') ,
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          ListTile(
+
+          OutlinedButton(
+              style: ButtonStyle(
+              side: MaterialStateProperty.resolveWith<BorderSide>(
+                (Set<MaterialState> states) {
+                  return BorderSide.none;
+                },
+              ),
+            ),
+              onPressed:(){
+               Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ProductHome(),
+                ),
+              );
+            } , child:ListTile(
             shape: RoundedRectangleBorder(
             side: const BorderSide(width: 2, color: Colors.black),
             borderRadius: BorderRadius.circular(10),
@@ -387,11 +410,26 @@ class _StepsState extends State<Steps> {
            leading: Image.asset('/images/0322img.jpg'),
               title: const Text('UNIQLO 特級極輕羽絨外套'),
               subtitle: const Text('NT 322') ,
-          ),
+          )),
           const SizedBox(
             height: 10,
           ),
-          ListTile(
+          OutlinedButton(
+              style: ButtonStyle(
+              side: MaterialStateProperty.resolveWith<BorderSide>(
+                (Set<MaterialState> states) {
+                  return BorderSide.none;
+                },
+              ),
+            ),
+              onPressed:(){
+               Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ProductHome(),
+                ),
+              );
+            } , child:ListTile(
             shape: RoundedRectangleBorder(
             side: const BorderSide(width: 2, color: Colors.black),
             borderRadius: BorderRadius.circular(10),
@@ -399,11 +437,26 @@ class _StepsState extends State<Steps> {
            leading: Image.asset('/images/0322img.jpg'),
               title: const Text('UNIQLO 特級極輕羽絨外套'),
               subtitle: const Text('NT 322') ,
-          ),
+          )),
           const SizedBox(
             height: 10,
           ),
-          ListTile(
+          OutlinedButton(
+              style: ButtonStyle(
+              side: MaterialStateProperty.resolveWith<BorderSide>(
+                (Set<MaterialState> states) {
+                  return BorderSide.none;
+                },
+              ),
+            ),
+              onPressed:(){
+               Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ProductHome(),
+                ),
+              );
+            } , child:ListTile(
             shape: RoundedRectangleBorder(
             side: const BorderSide(width: 2, color: Colors.black),
             borderRadius: BorderRadius.circular(10),
@@ -411,11 +464,26 @@ class _StepsState extends State<Steps> {
            leading: Image.asset('/images/0322img.jpg'),
               title: const Text('UNIQLO 特級極輕羽絨外套'),
               subtitle: const Text('NT 322') ,
-          ),
+          )),
           const SizedBox(
             height: 10,
           ),
-         ListTile(
+          OutlinedButton(
+              style: ButtonStyle(
+              side: MaterialStateProperty.resolveWith<BorderSide>(
+                (Set<MaterialState> states) {
+                  return BorderSide.none;
+                },
+              ),
+            ),
+              onPressed:(){
+               Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ProductHome(),
+                ),
+              );
+            } , child:ListTile(
             shape: RoundedRectangleBorder(
             side: const BorderSide(width: 2, color: Colors.black),
             borderRadius: BorderRadius.circular(10),
@@ -423,11 +491,26 @@ class _StepsState extends State<Steps> {
            leading: Image.asset('/images/0322img.jpg'),
               title: const Text('UNIQLO 特級極輕羽絨外套'),
               subtitle: const Text('NT 322') ,
-          ),
+          )),
           const SizedBox(
             height: 10,
           ),
-          ListTile(
+          OutlinedButton(
+              style: ButtonStyle(
+              side: MaterialStateProperty.resolveWith<BorderSide>(
+                (Set<MaterialState> states) {
+                  return BorderSide.none;
+                },
+              ),
+            ),
+              onPressed:(){
+               Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ProductHome(),
+                ),
+              );
+            } , child:ListTile(
             shape: RoundedRectangleBorder(
             side: const BorderSide(width: 2, color: Colors.black),
             borderRadius: BorderRadius.circular(10),
@@ -435,7 +518,61 @@ class _StepsState extends State<Steps> {
            leading: Image.asset('/images/0322img.jpg'),
               title: const Text('UNIQLO 特級極輕羽絨外套'),
               subtitle: const Text('NT 322') ,
-          )
+          )),
+          const SizedBox(
+            height: 10,
+          ),
+         OutlinedButton(
+              style: ButtonStyle(
+              side: MaterialStateProperty.resolveWith<BorderSide>(
+                (Set<MaterialState> states) {
+                  return BorderSide.none;
+                },
+              ),
+            ),
+              onPressed:(){
+               Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ProductHome(),
+                ),
+              );
+            } , child:ListTile(
+            shape: RoundedRectangleBorder(
+            side: const BorderSide(width: 2, color: Colors.black),
+            borderRadius: BorderRadius.circular(10),
+          ),
+           leading: Image.asset('/images/0322img.jpg'),
+              title: const Text('UNIQLO 特級極輕羽絨外套'),
+              subtitle: const Text('NT 322') ,
+          )),
+          const SizedBox(
+            height: 10,
+          ),
+          OutlinedButton(
+              style: ButtonStyle(
+              side: MaterialStateProperty.resolveWith<BorderSide>(
+                (Set<MaterialState> states) {
+                  return BorderSide.none;
+                },
+              ),
+            ),
+              onPressed:(){
+               Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ProductHome(),
+                ),
+              );
+            } , child:ListTile(
+            shape: RoundedRectangleBorder(
+            side: const BorderSide(width: 2, color: Colors.black),
+            borderRadius: BorderRadius.circular(10),
+          ),
+           leading: Image.asset('/images/0322img.jpg'),
+              title: const Text('UNIQLO 特級極輕羽絨外套'),
+              subtitle: const Text('NT 322') ,
+          )),
           ],),
           
           
