@@ -44,7 +44,7 @@ class _ProductHomePageState extends State<ProductHomePage> {
     }
     return Theme(
       data: ThemeData(
-        appBarTheme: AppBarTheme(
+        appBarTheme: const AppBarTheme(
           color: Colors.white,
           elevation: 0, // 将阴影去掉，以使AppBar看起来更平面
         ),

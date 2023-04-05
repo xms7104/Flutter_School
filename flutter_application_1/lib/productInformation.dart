@@ -6,8 +6,6 @@ void main() {
 
 class ProductInformation extends StatelessWidget {
 const  ProductInformation({super.key});
-
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -120,21 +118,7 @@ class _ProductInformationPageState extends State<ProductInformationPage> {
                     thickness: 1.0,
                   ),
                   const SizedBox(width: 20.0),
-                  InkWell(
-                    child: Container(
-                      width: 25,
-                      height: 25,
-                      decoration: const BoxDecoration(
-                        color: Colors.black,
-                        shape: BoxShape.circle
-                      ),
-                      child: const Center(
-                        child: Text('S',style: TextStyle(
-                          color: Colors.white
-                        ),),
-                        ),
-                    ),
-                  ),
+                  ColorChangingButton(onPressed: () {  }, text: '',),
                   const SizedBox(width: 20.0),
                   InkWell(
                     child: Container(
@@ -468,5 +452,180 @@ class _ProductInformationPageState extends State<ProductInformationPage> {
         }
       },
     );
+  }
+}
+
+class ColorChangingButton extends StatefulWidget {
+  final VoidCallback onPressed;
+  final String text;
+
+  const ColorChangingButton({super.key, required this.onPressed, required this.text});
+
+  @override
+  // ignore: library_private_types_in_public_api
+  _ColorChangingButton createState() => _ColorChangingButton();
+}
+
+class _ColorChangingButton extends State<ColorChangingButton> {
+   final Map<String, dynamic> _data = {
+    'S': false,
+    'M': false,
+    'L': false,
+  };
+
+  bool _isPressed = false;
+  // ignore: non_constant_identifier_names
+  bool _updateColor_S = false;
+  // ignore: non_constant_identifier_names
+  bool _updateColor_M = false;
+  // ignore: non_constant_identifier_names
+  bool _updateColor_L = false;
+  Color _backgroundColor_S = Colors.black;
+  Color _backgroundColor_M = Colors.black;
+  Color _backgroundColor_L = Colors.black;
+
+  @override
+  Widget build(BuildContext context) {
+
+  if (_isPressed && _updateColor_S && !_updateColor_M && !_updateColor_L) {
+    _backgroundColor_S = _backgroundColor_S == Colors.black
+    ? Colors.grey
+    : Colors.black;
+  }
+
+  if (_isPressed && _updateColor_M && !_updateColor_S && !_updateColor_L) {
+    _backgroundColor_M = _backgroundColor_M == Colors.black
+    ? Colors.grey
+    : Colors.black;
+  }
+
+  if (_isPressed && _updateColor_L && !_updateColor_S && !_updateColor_M) {
+    _backgroundColor_L = _backgroundColor_L == Colors.black
+    ? Colors.grey
+    : Colors.black;
+  }
+    return 
+    Row(children: [
+    GestureDetector(
+      onTapDown: (_) {
+        setState(() {
+          _isPressed = true;
+          _updateColor_S = true;
+          _updateColor_M = false;
+          _updateColor_L = false;
+        });
+      },
+      onTapUp: (_) {
+        setState(() {
+          _isPressed = false;
+          _updateColor_S = false;
+          _updateColor_M = true;
+          _updateColor_L = true;
+        });
+        widget.onPressed();
+      },
+      onTapCancel: () {
+        setState(() {
+          _isPressed = false;
+          _updateColor_S = false;
+          _updateColor_M = true;
+          _updateColor_L = true;
+        });
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+        decoration: BoxDecoration(
+          color: _backgroundColor_S,
+          shape: BoxShape.circle,
+        ),
+        child: Text(
+          'S',
+          style: TextStyle(
+             color: _backgroundColor_S == Colors.black ? Colors.white : Colors.black,
+          ),
+        ),
+      ),
+    ),
+    GestureDetector(
+      onTapDown: (_) {
+        setState(() {
+          _isPressed = true;
+          _updateColor_S = false;
+          _updateColor_M = true;
+          _updateColor_L = false;
+        });
+      },
+      onTapUp: (_) {
+        setState(() {
+          _isPressed = false;
+          _updateColor_S = true;
+          _updateColor_M = false;
+          _updateColor_L = true;
+        });
+        widget.onPressed();
+      },
+      onTapCancel: () {
+        setState(() {
+          _isPressed = false;
+          _updateColor_S = true;
+          _updateColor_M = false;
+          _updateColor_L = true;
+        });
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+        decoration: BoxDecoration(
+          color: _backgroundColor_M,
+          shape: BoxShape.circle,
+        ),
+        child: Text(
+          'M',
+          style: TextStyle(
+             color: _backgroundColor_M == Colors.black ? Colors.white : Colors.black,
+          ),
+        ),
+      ),
+    ),
+    GestureDetector(
+      onTapDown: (_) {
+        setState(() {
+          _isPressed = true;
+          _updateColor_S = false;
+          _updateColor_M = false;
+          _updateColor_L = true;
+        });
+      },
+      onTapUp: (_) {
+        setState(() {
+          _isPressed = false;
+          _updateColor_S = true;
+          _updateColor_M = true;
+          _updateColor_L = false;
+        });
+        widget.onPressed();
+      },
+      onTapCancel: () {
+        setState(() {
+          _isPressed = false;
+          _updateColor_S = true;
+          _updateColor_M = true;
+          _updateColor_L = false;
+        });
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+        decoration: BoxDecoration(
+          color: _backgroundColor_L,
+          shape: BoxShape.circle,
+        ),
+        child: Text(
+          'L',
+          style: TextStyle(
+             color: _backgroundColor_L == Colors.black ? Colors.white : Colors.black,
+          ),
+        ),
+      ),
+    )
+    ],);
   }
 }
