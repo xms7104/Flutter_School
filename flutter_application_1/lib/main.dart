@@ -2,6 +2,10 @@
 
 import 'package:flutter/material.dart';
 import './productHome.dart';
+import './WomenAPI.dart';
+import './menAPI.dart';
+import './accessoriesAPI.dart';
+import './productMobileList.dart';
 
 void main() {
   runApp(const MyApp());
@@ -41,41 +45,36 @@ class _MyHomePageState extends State<MyHomePage> {
       if (constraints.maxWidth <= 600) {
         return Column(
           children: <Widget>[
-        Expanded(
-            flex: 1,
-            child: Container(
-              alignment: Alignment.center,
-              width: MediaQuery.of(context).size.width,
-              margin: const EdgeInsets.all(8.0),
-              color: Colors.white,
-              child: Image.asset('/images/Image_Logo02.png'),
-            )),
-        Expanded(
-          flex: 4,
-          child: ListView(
-            physics: const AlwaysScrollableScrollPhysics(),
-            // This next line does the trick.
-            scrollDirection: Axis.horizontal,
-            children: List.generate(
-              8,
-              (index) {
-                return Container(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: Image.asset('/images/0322title.jpg')));
-              },
+            Expanded(
+                flex: 1,
+                child: Container(
+                  alignment: Alignment.center,
+                  width: MediaQuery.of(context).size.width,
+                  margin: const EdgeInsets.all(8.0),
+                  color: Colors.white,
+                  child: Image.asset('/images/Image_Logo02.png'),
+                )),
+            Expanded(
+              flex: 4,
+              child: ListView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                // This next line does the trick.
+                scrollDirection: Axis.horizontal,
+                children: List.generate(
+                  8,
+                  (index) {
+                    return Container(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: Image.asset('/images/0322title.jpg')));
+                  },
+                ),
+              ),
             ),
-          ),
-        ),
-        const Expanded(
-          flex: 10,
-          child: Expanded(
-            flex: 10,
-            child: Steps())
-        ),
-        
-
+            const Expanded(
+                flex: 10,
+                child: Expanded(flex: 10, child: ProductListMobilePage())),
           ],
         );
       } else {
@@ -145,155 +144,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: SizedBox(
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                          child: ListView(
-                        children: [
-                          Column(
-                            children: List.generate(8, (index) {
-                              return Container(
-                                  padding: const EdgeInsets.all(8),
-                                  child: OutlinedButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => const ProductHome(),
-                                        ),
-                                      );
-                                    },
-                                    child: Row(
-                                      children: [
-                                      Image.asset(
-                                        '/images/0322img.jpg',
-                                        width: 60,
-                                        height: 120,
-                                        scale: 2.0,
-                                      ),
-                                      const SizedBox( width: 30,),
-                                      Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: const [
-                                          Text(
-                                            'UNIQLO 特級極輕羽絨外套',
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                            ),
-                                            textAlign: TextAlign.left,
-                                          ),
-                                          Text(
-                                            'NT 322',
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                            ),
-                                            textAlign: TextAlign.left,
-                                          ),
-                                        ],
-                                      )
-                                    ]),
-                                  ));
-                            }),
-                          ),
-                        ],
-                      )),
-                      Expanded(
-                          child: ListView(
-                        children: [
-                          Column(
-                            children: List.generate(8, (index) {
-                              return Container(
-                                  padding: const EdgeInsets.all(8),
-                                  child: OutlinedButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => const ProductHome(),
-                                        ),
-                                      );
-                                    },
-                                    child: Row(children: [
-                                      Image.asset(
-                                        '/images/0322img.jpg',
-                                        width: 60,
-                                        height: 120,
-                                        scale: 2.0,
-                                      ),
-                                      const SizedBox( width: 30,),
-                                      Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: const [
-                                          Text(
-                                            'UNIQLO 特級極輕羽絨外套',
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                            ),
-                                            textAlign: TextAlign.left,
-                                          ),
-                                          Text(
-                                            'NT 322',
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                            ),
-                                            textAlign: TextAlign.left,
-                                          ),
-                                        ],
-                                      )
-                                    ]),
-                                  ));
-                            }),
-                          ),
-                        ],
-                      )),
-                      Expanded(
-                          child: ListView(
-                        children: [
-                          Column(
-                            children: List.generate(8, (index) {
-                              return Container(
-                                  padding: const EdgeInsets.all(8),
-                                  child: OutlinedButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => const ProductHome(),
-                                        ),
-                                      );
-                                    },
-                                    child: Row(children: [
-                                      Image.asset(
-                                        '/images/0322img.jpg',
-                                        width: 60,
-                                        height: 120,
-                                        scale: 2.0,
-                                      ),
-                                      const SizedBox( width: 30,),
-                                      Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: const [
-                                          Text(
-                                            'UNIQLO 特級極輕羽絨外套',
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                            ),
-                                            textAlign: TextAlign.left,
-                                          ),
-                                          Text(
-                                            'NT 322',
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                            ),
-                                            textAlign: TextAlign.left,
-                                          ),
-                                        ],
-                                      )
-                                    ]),
-                                  ));
-                            }),
-                          ),
-                        ],
-                      )),
+                    children: const [
+                      Expanded(child: WomenDate()),
+                      Expanded(child: MenDate()),
+                      Expanded(child: AccessoriesDate()),
                     ],
                   ),
                 ),
@@ -307,10 +161,7 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class Step {
-  Step(
-    this.title,
-    [this.isExpanded = false]
-  );
+  Step(this.title, [this.isExpanded = false]);
   String title;
   bool isExpanded;
 }
@@ -339,6 +190,7 @@ class _StepsState extends State<Steps> {
       ),
     );
   }
+
   Widget _renderSteps() {
     return ExpansionPanelList(
       expansionCallback: (int index, bool isExpanded) {
@@ -348,234 +200,13 @@ class _StepsState extends State<Steps> {
       },
       children: _steps.map<ExpansionPanel>((Step step) {
         return ExpansionPanel(
-          
           headerBuilder: (BuildContext context, bool isExpanded) {
-            return 
-            ListTile(
+            return ListTile(
               textColor: Colors.black,
               title: Text(step.title),
             );
           },
-          body: 
-          Column(children: [
-            OutlinedButton(
-              style: ButtonStyle(
-              side: MaterialStateProperty.resolveWith<BorderSide>(
-                (Set<MaterialState> states) {
-                  return BorderSide.none;
-                },
-              ),
-            ),
-              onPressed:(){
-               Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const ProductHome(),
-                ),
-              );
-            } , child:ListTile(
-            shape: RoundedRectangleBorder(
-            side: const BorderSide(width: 2, color: Colors.black),
-            borderRadius: BorderRadius.circular(10),
-          ),
-           leading: Image.asset('/images/0322img.jpg'),
-              title: const Text('UNIQLO 特級極輕羽絨外套'),
-              subtitle: const Text('NT 322') ,
-          )),
-
-          const SizedBox(
-            height: 10,
-          ),
-
-          OutlinedButton(
-              style: ButtonStyle(
-              side: MaterialStateProperty.resolveWith<BorderSide>(
-                (Set<MaterialState> states) {
-                  return BorderSide.none;
-                },
-              ),
-            ),
-              onPressed:(){
-               Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const ProductHome(),
-                ),
-              );
-            } , child:ListTile(
-            shape: RoundedRectangleBorder(
-            side: const BorderSide(width: 2, color: Colors.black),
-            borderRadius: BorderRadius.circular(10),
-          ),
-           leading: Image.asset('/images/0322img.jpg'),
-              title: const Text('UNIQLO 特級極輕羽絨外套'),
-              subtitle: const Text('NT 322') ,
-          )),
-          const SizedBox(
-            height: 10,
-          ),
-          OutlinedButton(
-              style: ButtonStyle(
-              side: MaterialStateProperty.resolveWith<BorderSide>(
-                (Set<MaterialState> states) {
-                  return BorderSide.none;
-                },
-              ),
-            ),
-              onPressed:(){
-               Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const ProductHome(),
-                ),
-              );
-            } , child:ListTile(
-            shape: RoundedRectangleBorder(
-            side: const BorderSide(width: 2, color: Colors.black),
-            borderRadius: BorderRadius.circular(10),
-          ),
-           leading: Image.asset('/images/0322img.jpg'),
-              title: const Text('UNIQLO 特級極輕羽絨外套'),
-              subtitle: const Text('NT 322') ,
-          )),
-          const SizedBox(
-            height: 10,
-          ),
-          OutlinedButton(
-              style: ButtonStyle(
-              side: MaterialStateProperty.resolveWith<BorderSide>(
-                (Set<MaterialState> states) {
-                  return BorderSide.none;
-                },
-              ),
-            ),
-              onPressed:(){
-               Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const ProductHome(),
-                ),
-              );
-            } , child:ListTile(
-            shape: RoundedRectangleBorder(
-            side: const BorderSide(width: 2, color: Colors.black),
-            borderRadius: BorderRadius.circular(10),
-          ),
-           leading: Image.asset('/images/0322img.jpg'),
-              title: const Text('UNIQLO 特級極輕羽絨外套'),
-              subtitle: const Text('NT 322') ,
-          )),
-          const SizedBox(
-            height: 10,
-          ),
-          OutlinedButton(
-              style: ButtonStyle(
-              side: MaterialStateProperty.resolveWith<BorderSide>(
-                (Set<MaterialState> states) {
-                  return BorderSide.none;
-                },
-              ),
-            ),
-              onPressed:(){
-               Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const ProductHome(),
-                ),
-              );
-            } , child:ListTile(
-            shape: RoundedRectangleBorder(
-            side: const BorderSide(width: 2, color: Colors.black),
-            borderRadius: BorderRadius.circular(10),
-          ),
-           leading: Image.asset('/images/0322img.jpg'),
-              title: const Text('UNIQLO 特級極輕羽絨外套'),
-              subtitle: const Text('NT 322') ,
-          )),
-          const SizedBox(
-            height: 10,
-          ),
-          OutlinedButton(
-              style: ButtonStyle(
-              side: MaterialStateProperty.resolveWith<BorderSide>(
-                (Set<MaterialState> states) {
-                  return BorderSide.none;
-                },
-              ),
-            ),
-              onPressed:(){
-               Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const ProductHome(),
-                ),
-              );
-            } , child:ListTile(
-            shape: RoundedRectangleBorder(
-            side: const BorderSide(width: 2, color: Colors.black),
-            borderRadius: BorderRadius.circular(10),
-          ),
-           leading: Image.asset('/images/0322img.jpg'),
-              title: const Text('UNIQLO 特級極輕羽絨外套'),
-              subtitle: const Text('NT 322') ,
-          )),
-          const SizedBox(
-            height: 10,
-          ),
-         OutlinedButton(
-              style: ButtonStyle(
-              side: MaterialStateProperty.resolveWith<BorderSide>(
-                (Set<MaterialState> states) {
-                  return BorderSide.none;
-                },
-              ),
-            ),
-              onPressed:(){
-               Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const ProductHome(),
-                ),
-              );
-            } , child:ListTile(
-            shape: RoundedRectangleBorder(
-            side: const BorderSide(width: 2, color: Colors.black),
-            borderRadius: BorderRadius.circular(10),
-          ),
-           leading: Image.asset('/images/0322img.jpg'),
-              title: const Text('UNIQLO 特級極輕羽絨外套'),
-              subtitle: const Text('NT 322') ,
-          )),
-          const SizedBox(
-            height: 10,
-          ),
-          OutlinedButton(
-              style: ButtonStyle(
-              side: MaterialStateProperty.resolveWith<BorderSide>(
-                (Set<MaterialState> states) {
-                  return BorderSide.none;
-                },
-              ),
-            ),
-              onPressed:(){
-               Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const ProductHome(),
-                ),
-              );
-            } , child:ListTile(
-            shape: RoundedRectangleBorder(
-            side: const BorderSide(width: 2, color: Colors.black),
-            borderRadius: BorderRadius.circular(10),
-          ),
-           leading: Image.asset('/images/0322img.jpg'),
-              title: const Text('UNIQLO 特級極輕羽絨外套'),
-              subtitle: const Text('NT 322') ,
-          )),
-          ],),
-          
-          
+          body: WomenDate(),
           isExpanded: step.isExpanded,
         );
       }).toList(),

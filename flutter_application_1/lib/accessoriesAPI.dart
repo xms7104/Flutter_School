@@ -1,0 +1,92 @@
+import 'dart:convert';
+
+import 'package:flutter/material.dart';
+import 'package:dio/dio.dart';
+import './productHome.dart';
+
+void main() {
+  runApp(const Accessories());
+}
+
+class Accessories extends StatelessWidget {
+  const Accessories({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      home: AccessoriesDate(),
+    );
+  }
+}
+
+class AccessoriesDate extends StatefulWidget {
+  const AccessoriesDate({Key? key}) : super(key: key);
+
+  @override
+  State<AccessoriesDate> createState() => _AccessoriesDateState();
+}
+
+class _AccessoriesDateState extends State<AccessoriesDate> {
+  var jsonList;
+
+  @override
+  // ignore: must_call_super
+  void initState() {
+    getData();
+  }
+
+  void getData() async {
+    try {
+      var response = await Dio()
+          .get('https://api.appworks-school.tw/api/1.0/products/accessories');
+      if (response.statusCode == 200) {
+        setState(() {
+          jsonList = response.data['data'] as List;
+        });
+      } else {
+        print(response.statusCode);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: ListView.builder(
+          itemCount: jsonList == null ? 0 : jsonList.length,
+          itemBuilder: (BuildContext context, int index) {
+            return SizedBox(
+                height: 150.0,
+                child: Card(
+                    child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const ProductHome(),
+                            ),
+                          );
+                        },
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              ListTile(
+                                leading: FractionallySizedBox(
+                                    heightFactor: 2.0,
+                                    child: AspectRatio(
+                                        aspectRatio: 1.0,
+                                        child: Image.network(
+                                          jsonList[index]['main_image'],
+                                        ))),
+                                title:
+                                    Text(jsonList[index]['title'].toString()),
+                                subtitle:
+                                    Text('NT \$${jsonList[index]['price']}'),
+                              )
+                            ]))));
+          }),
+    );
+  }
+}
