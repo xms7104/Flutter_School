@@ -62,12 +62,11 @@ class _WomenDateState extends State<WomenDate> {
                 child: Card(
                     child: InkWell(
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const ProductHome(),
-                            ),
-                          );
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return ProductHome(
+                                id: jsonList[index]['id'].toString());
+                          }));
                         },
                         child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,

@@ -64,9 +64,10 @@ class _AccessoriesDateState extends State<AccessoriesDate> {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(
-                              builder: (context) => const ProductHome(),
-                            ),
+                            MaterialPageRoute(builder: (context) {
+                              return ProductHome(
+                                  id: jsonList[index]['id'].toString());
+                            }),
                           );
                         },
                         child: Column(

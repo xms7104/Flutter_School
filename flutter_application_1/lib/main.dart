@@ -37,7 +37,6 @@ class _MyHomePageState extends State<MyHomePage> {
   bool womanListState = true;
   bool manListState = true;
   bool accessoriesListState = true;
-  final String productId = '123456';
 
   @override
   Widget build(BuildContext context) {
