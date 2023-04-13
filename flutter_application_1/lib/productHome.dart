@@ -97,29 +97,33 @@ class _ProductDateState extends State<ProductHome> {
                     reverse: true,
                     physics: const BouncingScrollPhysics(),
                     child: SizedBox(
-                      height: MediaQuery.of(context).size.height * screenHeight,
-                      child: Center(
-                          child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Expanded(
-                              flex: productFlex,
-                              child: Align(
-                                  alignment: Alignment.topCenter,
-                                  child: SizedBox(
-                                      height:
-                                          MediaQuery.of(context).size.height,
-                                      child: ProductInformation(
-                                          id: id, data: data)))),
-                          const Expanded(
-                              flex: 2,
-                              child: Padding(
-                                padding: EdgeInsets.all(16.0),
-                                child: SizedBox(child: DetailInformation()),
-                              )),
-                        ],
-                      )),
-                    )),
+                        height:
+                            MediaQuery.of(context).size.height * screenHeight,
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Center(
+                              child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                  flex: productFlex,
+                                  child: Align(
+                                      alignment: Alignment.topCenter,
+                                      child: SizedBox(
+                                          height: MediaQuery.of(context)
+                                              .size
+                                              .height,
+                                          child: ProductInformation(
+                                              id: id, data: data)))),
+                              const Expanded(
+                                  flex: 2,
+                                  child: Padding(
+                                    padding: EdgeInsets.all(16.0),
+                                    child: SizedBox(child: DetailInformation()),
+                                  )),
+                            ],
+                          )),
+                        ))),
               ),
             )));
   }

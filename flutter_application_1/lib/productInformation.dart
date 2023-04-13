@@ -10,21 +10,15 @@ class ProductInformation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(data['title']);
-    print(data.runtimeType);
-
     return Scaffold(
       body: ListView.builder(
           // ignore: unnecessary_null_comparison
           itemCount: data == null ? 0 : 1,
           itemBuilder: (BuildContext context, int index) {
-            print(data['id']);
-            print(data.runtimeType);
             String str = data['description'];
             List<String> description = str.split('\r\n');
-            print(description);
             return SizedBox(
-                height: 500,
+                height: 800,
                 child: Card(
                     child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
