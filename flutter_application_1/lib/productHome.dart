@@ -107,19 +107,21 @@ class _ProductDateState extends State<ProductHome> {
                             children: [
                               Expanded(
                                   flex: productFlex,
-                                  child: Align(
-                                      alignment: Alignment.topCenter,
-                                      child: SizedBox(
-                                          height: MediaQuery.of(context)
-                                              .size
-                                              .height,
-                                          child: ProductInformation(
-                                              id: id, data: data)))),
-                              const Expanded(
+                                  child: Padding(
+                                      padding: EdgeInsets.all(16.0),
+                                      child: Align(
+                                          alignment: Alignment.topCenter,
+                                          child: SizedBox(
+                                              height: MediaQuery.of(context)
+                                                  .size
+                                                  .height,
+                                              child: ProductInformation(
+                                                  id: id, data: data))))),
+                              Expanded(
                                   flex: 2,
                                   child: Padding(
                                     padding: EdgeInsets.all(16.0),
-                                    child: SizedBox(child: DetailInformation()),
+                                    child: DetailInformation(data: data),
                                   )),
                             ],
                           )),

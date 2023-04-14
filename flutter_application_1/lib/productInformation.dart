@@ -10,28 +10,43 @@ class ProductInformation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: non_constant_identifier_names
+    List<Color> ColorArray = [];
+    for (var i = 0; i < data['colors'].length; i++) {
+      // ignore: prefer_interpolation_to_compose_strings
+      var colorARGB = '0xFF' + data['colors'][i]['code'];
+      // ignore: unnecessary_cast
+      final Color colorCode = Color(int.parse(colorARGB)) as Color;
+      ColorArray.add(colorCode);
+    }
+    int _selectedIndex = -1;
     return Scaffold(
       body: ListView.builder(
+          physics: const BouncingScrollPhysics(),
           // ignore: unnecessary_null_comparison
           itemCount: data == null ? 0 : 1,
           itemBuilder: (BuildContext context, int index) {
             String str = data['description'];
             List<String> description = str.split('\r\n');
             return SizedBox(
-                height: 800,
+                height: 700,
                 child: Card(
                     child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Expanded(
                       child: Row(
+                        mainAxisAlignment:
+                            MainAxisAlignment.start, // 主對齊方式設置為 start
+                        crossAxisAlignment:
+                            CrossAxisAlignment.start, // 交叉對齊方式設置為 start
                         children: [
                           Expanded(
                             flex: 1,
                             child: SizedBox(
                                 child: FractionallySizedBox(
-                                    widthFactor: 0.98,
-                                    heightFactor: 0.98,
+                                    widthFactor: 0.75,
+                                    heightFactor: 0.75,
                                     child: Align(
                                       alignment: Alignment.topCenter,
                                       child: Image.network(
@@ -58,7 +73,7 @@ class ProductInformation extends StatelessWidget {
                                     color: Colors.grey,
                                   )),
                               const SizedBox(height: 30.0),
-                              Text('NT\$' + data["price"].toString(),
+                              Text('NT\$${data["price"]}',
                                   style: const TextStyle(
                                       fontSize: 20.0,
                                       color: Colors.black,
@@ -84,25 +99,29 @@ class ProductInformation extends StatelessWidget {
                                     thickness: 1.0,
                                   ),
                                   const SizedBox(width: 20.0),
-                                  InkWell(
-                                    child: Container(
-                                      width: 25,
-                                      height: 25,
-                                      decoration: BoxDecoration(
-                                        color: Colors.blue.shade900,
-                                      ),
-                                    ),
+                                  Wrap(
+                                    spacing: 10,
+                                    runSpacing: 10,
+                                    children: List.generate(ColorArray.length,
+                                        (index) {
+                                      return InkWell(
+                                        onTap: () {
+                                          _selectedIndex =
+                                              index; // 當點擊按鈕時，將_selectedIndex設置為當前按鈕的index
+                                        },
+                                        child: Container(
+                                          width: 25,
+                                          height: 25,
+                                          decoration: BoxDecoration(
+                                            color:
+                                                ColorArray[index], // 設置按鈕的背景顏色
+                                            border: Border.all(
+                                                color: Colors.black, width: 1),
+                                          ),
+                                        ),
+                                      );
+                                    }),
                                   ),
-                                  const SizedBox(width: 20.0),
-                                  InkWell(
-                                    child: Container(
-                                      width: 25,
-                                      height: 25,
-                                      decoration: BoxDecoration(
-                                        color: Colors.green.shade900,
-                                      ),
-                                    ),
-                                  )
                                 ],
                               ),
                               const SizedBox(height: 30.0),
@@ -121,10 +140,29 @@ class ProductInformation extends StatelessWidget {
                                     thickness: 1.0,
                                   ),
                                   const SizedBox(width: 20.0),
-                                  ColorChangingButton(
-                                    onPressed: () {},
-                                    text: '',
-                                  ),
+                                  Wrap(
+                                      spacing: 10,
+                                      runSpacing: 10,
+                                      children: List.generate(
+                                          data['sizes'].length, (index) {
+                                        return Container(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 8, horizontal: 16),
+                                          decoration: const BoxDecoration(
+                                            color: Colors.black,
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: Text(
+                                            data['sizes'][index].toString(),
+                                            style: const TextStyle(
+                                                color: Colors.white),
+                                          ),
+                                        );
+                                      }))
+                                  // ColorChangingButton(
+                                  //   onPressed: () {},
+                                  //   text: '',
+                                  // ),
                                 ],
                               ),
                               const SizedBox(height: 30.0),
@@ -218,11 +256,11 @@ class ProductInformation extends StatelessWidget {
                                   style: const TextStyle(
                                       fontSize: 16.0, color: Colors.black)),
                               const SizedBox(height: 10),
-                              Text('產地：' + data["place"].toString(),
+                              Text('產地：${data["place"]}',
                                   style: const TextStyle(
                                       fontSize: 16.0, color: Colors.black)),
                               const SizedBox(height: 10),
-                              Text('注意事項：' + data["wash"].toString(),
+                              Text('注意事項：${data["wash"]}',
                                   style: const TextStyle(
                                       fontSize: 16.0, color: Colors.black)),
                             ],
