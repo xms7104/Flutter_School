@@ -51,13 +51,21 @@ class _ProductDateState extends State<ProductHome> {
 
     double screenHeight;
     int productFlex;
+    double imageFlex;
+
     if (screenSize.width >= 600) {
       screenHeight = 2.7;
       productFlex = 1;
+      imageFlex = 2.2;
     } else {
       screenHeight = 2.2;
       productFlex = 2;
+      imageFlex = 1.2;
     }
+    if (jsonList == null || jsonList.isEmpty) {
+      print('need loading');
+    }
+
     return Theme(
         data: ThemeData(
           appBarTheme: const AppBarTheme(
@@ -97,32 +105,35 @@ class _ProductDateState extends State<ProductHome> {
                     reverse: true,
                     physics: const BouncingScrollPhysics(),
                     child: SizedBox(
-                        height:
-                            MediaQuery.of(context).size.height * screenHeight,
+                        height: MediaQuery.of(context).size.height * 3,
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Center(
                               child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Expanded(
                                   flex: productFlex,
-                                  child: Padding(
-                                      padding: EdgeInsets.all(16.0),
-                                      child: Align(
-                                          alignment: Alignment.topCenter,
-                                          child: SizedBox(
-                                              height: MediaQuery.of(context)
+                                  child: Align(
+                                      alignment: Alignment.topCenter,
+                                      child: SizedBox(
+                                          height: MediaQuery.of(context)
                                                   .size
-                                                  .height,
-                                              child: ProductInformation(
-                                                  id: id, data: data))))),
+                                                  .height *
+                                              1.4,
+                                          child: ProductInformation(
+                                              id: id, data: data)))),
                               Expanded(
                                   flex: 2,
-                                  child: Padding(
-                                    padding: EdgeInsets.all(16.0),
-                                    child: DetailInformation(data: data),
-                                  )),
+                                  child: Align(
+                                      alignment: Alignment.topCenter,
+                                      child: SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                imageFlex,
+                                        child: DetailInformation(data: data),
+                                      ))),
                             ],
                           )),
                         ))),
