@@ -18,7 +18,10 @@ class ProductHome extends StatefulWidget {
 }
 
 class _ProductDateState extends State<ProductHome> {
+  bool _isLoading = true;
+  // ignore: prefer_typing_uninitialized_variables
   var jsonList;
+
   @override
   void initState() {
     getData();
@@ -32,6 +35,11 @@ class _ProductDateState extends State<ProductHome> {
       if (response.statusCode == 200) {
         setState(() {
           jsonList = response.data['data'];
+          Future.delayed(const Duration(seconds: 1), () {
+            setState(() {
+              _isLoading = false;
+            });
+          });
         });
       } else {
         print(response.statusCode);
@@ -62,83 +70,87 @@ class _ProductDateState extends State<ProductHome> {
       productFlex = 2;
       imageFlex = 1.2;
     }
-    if (jsonList == null || jsonList.isEmpty) {
-      print('need loading');
-    }
 
-    return Theme(
-        data: ThemeData(
-          appBarTheme: const AppBarTheme(
-            color: Colors.white,
-            elevation: 0, // 将阴影去掉，以使AppBar看起来更平面
+    if (_isLoading == true || jsonList == null || jsonList.isEmpty) {
+      return Scaffold(
+        body: Image.asset('./images/loading.gif'),
+      );
+    } else {
+      return Theme(
+          data: ThemeData(
+            appBarTheme: const AppBarTheme(
+              color: Colors.white,
+              elevation: 0, // 将阴影去掉，以使AppBar看起来更平面
+            ),
           ),
-        ),
-        child: Scaffold(
-            resizeToAvoidBottomInset: false,
-            appBar: AppBar(
-                title: Center(
-                    child: OutlinedButton(
-                        style: ButtonStyle(
-                          side: MaterialStateProperty.resolveWith<BorderSide>(
-                            (Set<MaterialState> states) {
-                              return BorderSide.none;
-                            },
-                          ),
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const MyApp(),
+          child: Scaffold(
+              resizeToAvoidBottomInset: false,
+              appBar: AppBar(
+                  title: Center(
+                      child: OutlinedButton(
+                          style: ButtonStyle(
+                            side: MaterialStateProperty.resolveWith<BorderSide>(
+                              (Set<MaterialState> states) {
+                                return BorderSide.none;
+                              },
                             ),
-                          );
-                        },
-                        child: Image.asset(
-                          './images/Image_Logo02.png',
-                          width: 200,
-                        )))),
-            body: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Scrollbar(
-                child: SingleChildScrollView(
-                    scrollDirection: Axis.vertical,
-                    reverse: true,
-                    physics: const BouncingScrollPhysics(),
-                    child: SizedBox(
-                        height: MediaQuery.of(context).size.height * 3,
-                        child: Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Center(
-                              child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                  flex: productFlex,
-                                  child: Align(
-                                      alignment: Alignment.topCenter,
-                                      child: SizedBox(
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const MyApp(),
+                              ),
+                            );
+                          },
+                          child: Image.asset(
+                            './images/Image_Logo02.png',
+                            width: 200,
+                          )))),
+              body: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Scrollbar(
+                  child: SingleChildScrollView(
+                      scrollDirection: Axis.vertical,
+                      reverse: true,
+                      physics: const BouncingScrollPhysics(),
+                      child: SizedBox(
+                          height: MediaQuery.of(context).size.height * 3,
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Center(
+                                child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                    flex: productFlex,
+                                    child: Align(
+                                        alignment: Alignment.topCenter,
+                                        child: SizedBox(
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                1.4,
+                                            child: ProductInformation(
+                                                id: id, data: data)))),
+                                Expanded(
+                                    flex: 2,
+                                    child: Align(
+                                        alignment: Alignment.topCenter,
+                                        child: SizedBox(
                                           height: MediaQuery.of(context)
                                                   .size
                                                   .height *
-                                              1.4,
-                                          child: ProductInformation(
-                                              id: id, data: data)))),
-                              Expanded(
-                                  flex: 2,
-                                  child: Align(
-                                      alignment: Alignment.topCenter,
-                                      child: SizedBox(
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                imageFlex,
-                                        child: DetailInformation(data: data),
-                                      ))),
-                            ],
-                          )),
-                        ))),
-              ),
-            )));
+                                              imageFlex,
+                                          child: DetailInformation(data: data),
+                                        ))),
+                              ],
+                            )),
+                          ))),
+                ),
+              )));
+    }
   }
 }
 
