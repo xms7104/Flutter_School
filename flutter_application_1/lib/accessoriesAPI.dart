@@ -1,4 +1,4 @@
-import 'dart:convert';
+// ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
@@ -27,6 +27,7 @@ class AccessoriesDate extends StatefulWidget {
 }
 
 class _AccessoriesDateState extends State<AccessoriesDate> {
+  // ignore: prefer_typing_uninitialized_variables
   var jsonList;
 
   @override
