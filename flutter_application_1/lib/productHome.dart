@@ -45,27 +45,33 @@ class _ProductDateState extends State<ProductHome> {
 
   @override
   Widget build(BuildContext context) {
-    // ignore: unused_local_variable
-    String data1Str = '$jsonList';
-    Map<String, dynamic> dataMap = jsonList;
-    var data = dataMap;
-    var id = widget.id;
-    final screenSize = MediaQuery.of(context).size;
-
-    // ignore: unused_local_variable
-    double screenHeight;
-    int productFlex;
-    double imageFlex;
-
-    if (screenSize.width >= 600) {
-      screenHeight = 2.7;
-      productFlex = 1;
-      imageFlex = 2.2;
+    if (jsonList == null) {
+      return Scaffold(
+        body: Center(child: Image.asset('./images/loading.gif')),
+      );
     } else {
-      screenHeight = 2.2;
-      productFlex = 2;
-      imageFlex = 1.4;
-    }
+      // ignore: unused_local_variable
+      String data1Str = '$jsonList';
+      Map<String, dynamic> dataMap = jsonList;
+      var data = dataMap;
+      var id = widget.id;
+      final screenSize = MediaQuery.of(context).size;
+
+      // ignore: unused_local_variable
+      double screenHeight;
+      int productFlex;
+      double imageFlex;
+
+      if (screenSize.width >= 600) {
+        screenHeight = 2.7;
+        productFlex = 1;
+        imageFlex = 2.2;
+      } else {
+        screenHeight = 2.2;
+        productFlex = 2;
+        imageFlex = 1.4;
+      }
+
       return Theme(
           data: ThemeData(
             appBarTheme: const AppBarTheme(
@@ -142,3 +148,4 @@ class _ProductDateState extends State<ProductHome> {
               )));
     }
   }
+}
