@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:dio/dio.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import './productHome.dart';
 
 void main() {
@@ -25,6 +26,7 @@ class MenDate extends StatefulWidget {
 }
 
 class _MenDateState extends State<MenDate> {
+  bool _isLoading = true;
   var jsonList;
 
   @override
@@ -33,59 +35,108 @@ class _MenDateState extends State<MenDate> {
     getData();
   }
 
-  void getData() async {
-    try {
-      var response = await Dio()
-          .get('https://api.appworks-school.tw/api/1.0/products/men');
-      if (response.statusCode == 200) {
-        setState(() {
-          jsonList = response.data['data'] as List;
-        });
-      } else {
-        print(response.statusCode);
-      }
-    } catch (e) {
-      print(e);
+  Future getData() async {
+    var response = await http
+        .get(Uri.parse('https://api.appworks-school.tw/api/1.0/products/men'));
+    if (response.statusCode == 200) {
+      String jsonString = '[${response.body}]';
+      List<dynamic> jsonList = json.decode(jsonString);
+      List<Map<String, dynamic>> mapList =
+          List<Map<String, dynamic>>.from(jsonList);
+
+      // print(mapList[0]['data'][0]['id']);
+
+      // setState(() {
+      //   jsonList = mapList[0]['data'];
+      // });
+      jsonList = mapList[0]['data'];
+      // if (jsonList != null) {
+      //   _isLoading = false;
+      //   setState(() {
+      //     jsonList = mapList[0]['data'];
+      //   });
+      // }
+
+      return jsonList;
+    } else {
+      throw Exception('Failed to load data');
     }
   }
 
+  void _updateMessage() {
+    getData().then((data) {
+      setState(() {
+        jsonList = data;
+      });
+      if (jsonList != []) {
+        _isLoading = false;
+      }
+    });
+  }
+
+  // void getData() async {
+  //   try {
+  //     var response = await Dio()
+  //         .get('https://api.appworks-school.tw/api/1.0/products/men');
+  //     if (response.statusCode == 200) {
+  //       setState(() {
+  //         jsonList = response.data['data'] as List;
+  //       });
+  //     } else {
+  //       print(response.statusCode);
+  //     }
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView.builder(
-          itemCount: jsonList == null ? 0 : jsonList.length,
-          itemBuilder: (BuildContext context, int index) {
-            return SizedBox(
-                height: 150.0,
-                child: Card(
-                    child: InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) {
-                              return ProductHome(
-                                  id: jsonList[index]['id'].toString());
-                            }),
-                          );
-                        },
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              ListTile(
-                                leading: FractionallySizedBox(
-                                    heightFactor: 2.0,
-                                    child: AspectRatio(
-                                        aspectRatio: 1.0,
-                                        child: Image.network(
-                                          jsonList[index]['main_image'],
-                                        ))),
-                                title:
-                                    Text(jsonList[index]['title'].toString()),
-                                subtitle:
-                                    Text('NT \$${jsonList[index]['price']}'),
-                              )
-                            ]))));
-          }),
-    );
+    if (_isLoading || jsonList == null) {
+      _updateMessage();
+      return Scaffold(
+          body: Center(
+        child: Image.asset('./images/loading.gif'),
+      ));
+    } else {
+      print(jsonList);
+      return Scaffold(
+        body: ListView.builder(
+            itemCount: jsonList == null ? 0 : jsonList.length,
+            itemBuilder: (BuildContext context, int index) {
+              return SizedBox(
+                  height: 150.0,
+                  child: Card(
+                      child: InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) {
+                                return ProductHome(
+                                    id: jsonList[index]['id'].toString());
+                              }),
+                            );
+                          },
+                          child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                ListTile(
+                                  leading: FractionallySizedBox(
+                                      heightFactor: 2.0,
+                                      child: AspectRatio(
+                                          aspectRatio: 1.0,
+                                          child: Image.network(
+                                            jsonList[index]['main_image']
+                                                .toString(),
+                                          ))),
+                                  title:
+                                      Text(jsonList[index]['title'].toString()),
+                                  subtitle: Text(
+                                      'NT \$${jsonList[index]['price'].toString()}'),
+                                )
+                              ]))));
+            }),
+      );
+    }
   }
 }

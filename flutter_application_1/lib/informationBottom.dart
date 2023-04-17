@@ -20,7 +20,6 @@ class DetailInformation extends StatelessWidget {
       screenHeight = 1.5;
       widthMobile = 1;
     }
-    print(data['story']);
     return Scaffold(
         body: ListView.builder(
             physics: const NeverScrollableScrollPhysics(),
