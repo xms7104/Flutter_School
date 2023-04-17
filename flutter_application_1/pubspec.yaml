@@ -38,6 +38,7 @@ dependencies:
   dio: ^5.1.1
   http: ^0.13.5
   bloc: ^8.1.1
+  flutter_tappay: ^0.3.0+2
   
 dev_dependencies:
   flutter_test:
