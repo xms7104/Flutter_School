@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -10,7 +12,6 @@ class ProductInformation extends StatelessWidget {
       : super(key: key);
 
   @override
-  
   Widget build(BuildContext context) {
     // ignore: non_constant_identifier_names
     List<Color> ColorArray = [];
@@ -145,29 +146,11 @@ class ProductInformation extends StatelessWidget {
                                       thickness: 1.0,
                                     ),
                                     const SizedBox(width: 20.0),
-                                    Wrap(
-                                        spacing: 10,
-                                        runSpacing: 10,
-                                        children: List.generate(
-                                            data['sizes'].length, (index) {
-                                          return Container(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 8, horizontal: 16),
-                                            decoration: const BoxDecoration(
-                                              color: Colors.black,
-                                              shape: BoxShape.circle,
-                                            ),
-                                            child: Text(
-                                              data['sizes'][index].toString(),
-                                              style: const TextStyle(
-                                                  color: Colors.white),
-                                            ),
-                                          );
-                                        }))
-                                    // ColorChangingButton(
-                                    //   onPressed: () {},
-                                    //   text: '',
-                                    // ),
+                                    SizedBox(
+                                      height: 100,
+                                      width: 200,
+                                      child: MyButton(data: data['sizes']),
+                                    ),
                                   ],
                                 ),
                                 const SizedBox(height: 30.0),
@@ -186,10 +169,8 @@ class ProductInformation extends StatelessWidget {
                                   ),
                                   SizedBox(width: 20.0),
                                   Expanded(
-                                    child: 
-                                    SizedBox(
-                                     height: 30,
-                                    child:CarCountPage()),
+                                    child: SizedBox(
+                                        height: 30, child: CarCountPage()),
                                   ),
                                 ]),
                                 const SizedBox(height: 20),
@@ -363,32 +344,11 @@ class ProductInformation extends StatelessWidget {
                                           thickness: 1.0,
                                         ),
                                         const SizedBox(width: 20.0),
-                                        Wrap(
-                                            spacing: 10,
-                                            runSpacing: 10,
-                                            children: List.generate(
-                                                data['sizes'].length, (index) {
-                                              return Container(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        vertical: 8,
-                                                        horizontal: 16),
-                                                decoration: const BoxDecoration(
-                                                  color: Colors.black,
-                                                  shape: BoxShape.circle,
-                                                ),
-                                                child: Text(
-                                                  data['sizes'][index]
-                                                      .toString(),
-                                                  style: const TextStyle(
-                                                      color: Colors.white),
-                                                ),
-                                              );
-                                            }))
-                                        // ColorChangingButton(
-                                        //   onPressed: () {},
-                                        //   text: '',
-                                        // ),
+                                        SizedBox(
+                                          height: 100,
+                                          width: 200,
+                                          child: MyButton(data: data['sizes']),
+                                        ),
                                       ],
                                     ),
                                     const SizedBox(height: 30.0),
@@ -407,10 +367,9 @@ class ProductInformation extends StatelessWidget {
                                       ),
                                       SizedBox(width: 20.0),
                                       Expanded(
-                                      child: SizedBox(
-                                     height: 30,
-                                    child:CarCountPage()),
-                                  ), 
+                                        child: SizedBox(
+                                            height: 30, child: CarCountPage()),
+                                      ),
                                     ]),
                                     const SizedBox(height: 20),
                                     SizedBox(
@@ -471,179 +430,75 @@ class ProductInformation extends StatelessWidget {
   }
 }
 
-class ColorChangingButton extends StatefulWidget {
-  final VoidCallback onPressed;
-  final String text;
-
-  const ColorChangingButton(
-      {super.key, required this.onPressed, required this.text});
+class MyButton extends StatefulWidget {
+  final List<dynamic> data;
+  const MyButton({super.key, required this.data});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _ColorChangingButton createState() => _ColorChangingButton();
+  _MyButtonState createState() => _MyButtonState();
 }
 
-class _ColorChangingButton extends State<ColorChangingButton> {
-  final Map<String, dynamic> _data = {
-    'S': false,
-    'M': false,
-    'L': false,
-  };
-
-  bool _isPressed = false;
-  // ignore: non_constant_identifier_names
-  bool _updateColor_S = false;
-  // ignore: non_constant_identifier_names
-  bool _updateColor_M = false;
-  // ignore: non_constant_identifier_names
-  bool _updateColor_L = false;
-  Color _backgroundColor_S = Colors.black;
-  Color _backgroundColor_M = Colors.black;
-  Color _backgroundColor_L = Colors.black;
+class _MyButtonState extends State<MyButton> {
+  int _selectedButtonIndex = -1;
 
   @override
   Widget build(BuildContext context) {
-    if (_isPressed && _updateColor_S && !_updateColor_M && !_updateColor_L) {
-      _backgroundColor_S =
-          _backgroundColor_S == Colors.black ? Colors.grey : Colors.black;
-    }
+    return Scaffold(
+      body: SizedBox(
+          height: 100,
+          width: 200,
+          child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              physics: const BouncingScrollPhysics(),
+              // ignore: unnecessary_null_comparison
+              itemCount: widget.data == null ? 0 : widget.data.length,
+              itemBuilder: (BuildContext context, int index) {
+                return MyCustomButton(
+                  text: widget.data[index],
+                  index: index,
+                  isSelected: _selectedButtonIndex == index,
+                  onPressed: () {
+                    setState(() {
+                      _selectedButtonIndex = index;
+                    });
+                  },
+                );
+              })),
+    );
+  }
+}
 
-    if (_isPressed && _updateColor_M && !_updateColor_S && !_updateColor_L) {
-      _backgroundColor_M =
-          _backgroundColor_M == Colors.black ? Colors.grey : Colors.black;
-    }
+class MyCustomButton extends StatelessWidget {
+  final String text;
+  final int index;
+  final bool isSelected;
+  final VoidCallback onPressed;
 
-    if (_isPressed && _updateColor_L && !_updateColor_S && !_updateColor_M) {
-      _backgroundColor_L =
-          _backgroundColor_L == Colors.black ? Colors.grey : Colors.black;
-    }
+  const MyCustomButton({
+    Key? key,
+    required this.text,
+    required this.index,
+    required this.isSelected,
+    required this.onPressed,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return Row(
       children: [
-        GestureDetector(
-          onTapDown: (_) {
-            setState(() {
-              _isPressed = true;
-              _updateColor_S = true;
-              _updateColor_M = false;
-              _updateColor_L = false;
-            });
-          },
-          onTapUp: (_) {
-            setState(() {
-              _isPressed = false;
-              _updateColor_S = false;
-              _updateColor_M = true;
-              _updateColor_L = true;
-            });
-            widget.onPressed();
-          },
-          onTapCancel: () {
-            setState(() {
-              _isPressed = false;
-              _updateColor_S = false;
-              _updateColor_M = true;
-              _updateColor_L = true;
-            });
-          },
-          child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-            decoration: BoxDecoration(
-              color: _backgroundColor_S,
-              shape: BoxShape.circle,
-            ),
-            child: Text(
-              'S',
-              style: TextStyle(
-                color: _backgroundColor_S == Colors.black
-                    ? Colors.white
-                    : Colors.black,
-              ),
-            ),
+        ElevatedButton(
+          onPressed: onPressed,
+          style: ElevatedButton.styleFrom(
+            foregroundColor: isSelected ? Colors.white : Colors.black,
+            backgroundColor: isSelected ? Colors.black : Colors.white,
+            shape: const CircleBorder(),
+            padding: const EdgeInsets.all(0),
+            minimumSize: const Size(40, 40),
           ),
+          child: Text(text),
         ),
-        GestureDetector(
-          onTapDown: (_) {
-            setState(() {
-              _isPressed = true;
-              _updateColor_S = false;
-              _updateColor_M = true;
-              _updateColor_L = false;
-            });
-          },
-          onTapUp: (_) {
-            setState(() {
-              _isPressed = false;
-              _updateColor_S = true;
-              _updateColor_M = false;
-              _updateColor_L = true;
-            });
-            widget.onPressed();
-          },
-          onTapCancel: () {
-            setState(() {
-              _isPressed = false;
-              _updateColor_S = true;
-              _updateColor_M = false;
-              _updateColor_L = true;
-            });
-          },
-          child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-            decoration: BoxDecoration(
-              color: _backgroundColor_M,
-              shape: BoxShape.circle,
-            ),
-            child: Text(
-              'M',
-              style: TextStyle(
-                color: _backgroundColor_M == Colors.black
-                    ? Colors.white
-                    : Colors.black,
-              ),
-            ),
-          ),
-        ),
-        GestureDetector(
-          onTapDown: (_) {
-            setState(() {
-              _isPressed = true;
-              _updateColor_S = false;
-              _updateColor_M = false;
-              _updateColor_L = true;
-            });
-          },
-          onTapUp: (_) {
-            setState(() {
-              _isPressed = false;
-              _updateColor_S = true;
-              _updateColor_M = true;
-              _updateColor_L = false;
-            });
-            widget.onPressed();
-          },
-          onTapCancel: () {
-            setState(() {
-              _isPressed = false;
-              _updateColor_S = true;
-              _updateColor_M = true;
-              _updateColor_L = false;
-            });
-          },
-          child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-            decoration: BoxDecoration(
-              color: _backgroundColor_L,
-              shape: BoxShape.circle,
-            ),
-            child: Text(
-              'L',
-              style: TextStyle(
-                color: _backgroundColor_L == Colors.black
-                    ? Colors.white
-                    : Colors.black,
-              ),
-            ),
-          ),
+        const SizedBox(
+          width: 10,
         )
       ],
     );

@@ -43,20 +43,7 @@ class _MenDateState extends State<MenDate> {
       List<dynamic> jsonList = json.decode(jsonString);
       List<Map<String, dynamic>> mapList =
           List<Map<String, dynamic>>.from(jsonList);
-
-      // print(mapList[0]['data'][0]['id']);
-
-      // setState(() {
-      //   jsonList = mapList[0]['data'];
-      // });
       jsonList = mapList[0]['data'];
-      // if (jsonList != null) {
-      //   _isLoading = false;
-      //   setState(() {
-      //     jsonList = mapList[0]['data'];
-      //   });
-      // }
-
       return jsonList;
     } else {
       throw Exception('Failed to load data');
@@ -74,22 +61,6 @@ class _MenDateState extends State<MenDate> {
     });
   }
 
-  // void getData() async {
-  //   try {
-  //     var response = await Dio()
-  //         .get('https://api.appworks-school.tw/api/1.0/products/men');
-  //     if (response.statusCode == 200) {
-  //       setState(() {
-  //         jsonList = response.data['data'] as List;
-  //       });
-  //     } else {
-  //       print(response.statusCode);
-  //     }
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     if (_isLoading || jsonList == null) {
@@ -99,7 +70,6 @@ class _MenDateState extends State<MenDate> {
         child: Image.asset('./images/loading.gif'),
       ));
     } else {
-      print(jsonList);
       return Scaffold(
         body: ListView.builder(
             itemCount: jsonList == null ? 0 : jsonList.length,
