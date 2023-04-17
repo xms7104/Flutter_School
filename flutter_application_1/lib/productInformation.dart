@@ -22,7 +22,6 @@ class ProductInformation extends StatelessWidget {
       final Color colorCode = Color(int.parse(colorARGB)) as Color;
       ColorArray.add(colorCode);
     }
-    int _selectedIndex = -1;
 
     if (MediaQuery.of(context).size.width > 600) {
       return Scaffold(
@@ -104,30 +103,11 @@ class ProductInformation extends StatelessWidget {
                                       thickness: 1.0,
                                     ),
                                     const SizedBox(width: 20.0),
-                                    Wrap(
-                                      spacing: 10,
-                                      runSpacing: 10,
-                                      children: List.generate(ColorArray.length,
-                                          (index) {
-                                        return InkWell(
-                                          onTap: () {
-                                            _selectedIndex =
-                                                index; // 當點擊按鈕時，將_selectedIndex設置為當前按鈕的index
-                                          },
-                                          child: Container(
-                                            width: 25,
-                                            height: 25,
-                                            decoration: BoxDecoration(
-                                              color: ColorArray[
-                                                  index], // 設置按鈕的背景顏色
-                                              border: Border.all(
-                                                  color: Colors.black,
-                                                  width: 1),
-                                            ),
-                                          ),
-                                        );
-                                      }),
-                                    ),
+                                    Expanded(
+                                        child: SizedBox(
+                                            height: 30,
+                                            child: ColorBtn(
+                                                data: data['colors']))),
                                   ],
                                 ),
                                 const SizedBox(height: 30.0),
@@ -146,10 +126,11 @@ class ProductInformation extends StatelessWidget {
                                       thickness: 1.0,
                                     ),
                                     const SizedBox(width: 20.0),
-                                    SizedBox(
-                                      height: 100,
-                                      width: 200,
-                                      child: MyButton(data: data['sizes']),
+                                    Expanded(
+                                      child: SizedBox(
+                                        height: 30,
+                                        child: MyButton(data: data['sizes']),
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -302,30 +283,11 @@ class ProductInformation extends StatelessWidget {
                                           thickness: 1.0,
                                         ),
                                         const SizedBox(width: 20.0),
-                                        Wrap(
-                                          spacing: 10,
-                                          runSpacing: 10,
-                                          children: List.generate(
-                                              ColorArray.length, (index) {
-                                            return InkWell(
-                                              onTap: () {
-                                                _selectedIndex =
-                                                    index; // 當點擊按鈕時，將_selectedIndex設置為當前按鈕的index
-                                              },
-                                              child: Container(
-                                                width: 25,
-                                                height: 25,
-                                                decoration: BoxDecoration(
-                                                  color: ColorArray[
-                                                      index], // 設置按鈕的背景顏色
-                                                  border: Border.all(
-                                                      color: Colors.black,
-                                                      width: 1),
-                                                ),
-                                              ),
-                                            );
-                                          }),
-                                        ),
+                                        Expanded(
+                                            child: SizedBox(
+                                                height: 30,
+                                                child: ColorBtn(
+                                                    data: data['colors']))),
                                       ],
                                     ),
                                     const SizedBox(height: 30.0),
@@ -344,10 +306,12 @@ class ProductInformation extends StatelessWidget {
                                           thickness: 1.0,
                                         ),
                                         const SizedBox(width: 20.0),
-                                        SizedBox(
-                                          height: 100,
-                                          width: 200,
-                                          child: MyButton(data: data['sizes']),
+                                        Expanded(
+                                          child: SizedBox(
+                                            height: 30,
+                                            child:
+                                                MyButton(data: data['sizes']),
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -501,6 +465,68 @@ class MyCustomButton extends StatelessWidget {
           width: 10,
         )
       ],
+    );
+  }
+}
+
+//Color
+class ColorBtn extends StatefulWidget {
+  final List<dynamic> data;
+  const ColorBtn({super.key, required this.data});
+
+  @override
+  _ColorBtnState createState() => _ColorBtnState();
+}
+
+class _ColorBtnState extends State<ColorBtn> {
+  int _colorSelectedIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    // ignore: non_constant_identifier_names
+    List<Color> ColorArray = [];
+    for (var i = 0; i < widget.data.length; i++) {
+      // ignore: prefer_interpolation_to_compose_strings
+      var colorARGB = '0xFF' + widget.data[i]['code'];
+      // ignore: unnecessary_cast
+      final Color colorCode = Color(int.parse(colorARGB)) as Color;
+      ColorArray.add(colorCode);
+    }
+    print(ColorArray);
+    return Scaffold(
+      body: SizedBox(
+        child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            physics: const BouncingScrollPhysics(),
+            // ignore: unnecessary_null_comparison
+            itemCount: ColorArray == null ? 0 : ColorArray.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Row(
+                children: [
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        _colorSelectedIndex = index;
+                      });
+                    },
+                    child: Container(
+                      width: 25,
+                      height: 25,
+                      decoration: BoxDecoration(
+                        color: ColorArray[index],
+                        border: _colorSelectedIndex == index
+                            ? Border.all(color: Colors.black, width: 2)
+                            : null,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 30,
+                  )
+                ],
+              );
+            }),
+      ),
     );
   }
 }
