@@ -1,10 +1,6 @@
-// ignore_for_file: camel_case_types
-
+import 'dart:async';
 import 'package:flutter/material.dart';
-import './WomenAPI.dart';
-import './menAPI.dart';
-import './accessoriesAPI.dart';
-import './productMobileList.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,18 +9,39 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'StyLish',
-      theme: ThemeData(),
-      home: const MyHomePage(title: 'StyLish Home Page'),
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        // This is the theme of your application.
+        //
+        // Try running your application with "flutter run". You'll see the
+        // application has a blue toolbar. Then, without quitting the app, try
+        // changing the primarySwatch below to Colors.green and then invoke
+        // "hot reload" (press "r" in the console where you ran "flutter run",
+        // or simply save your changes to "hot reload" in a Flutter IDE).
+        // Notice that the counter didn't reset back to zero; the application
+        // is not restarted.
+        primarySwatch: Colors.blue,
+      ),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
+
+  // This widget is the home page of your application. It is stateful, meaning
+  // that it has a State object (defined below) that contains fields that affect
+  // how it looks.
+
+  // This class is the configuration for the state. It holds the values (in this
+  // case the title) provided by the parent (in this case the App widget) and
+  // used by the build method of the State. Fields in a Widget subclass are
+  // always marked "final".
 
   final String title;
 
@@ -33,127 +50,41 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  bool womanListState = true;
-  bool manListState = true;
-  bool accessoriesListState = true;
+  static const platform = MethodChannel('samples.flutter.dev/battery');
+  String _batteryLevel = 'Unknown battery level.';
+
+  Future<void> _getBatteryLevel() async {
+    String batteryLevel;
+    try {
+      final int result = await platform.invokeMethod('getBatteryLevel');
+      batteryLevel = 'Battery level at $result % .';
+    } on PlatformException catch (e) {
+      batteryLevel = "Failed to get battery level: '${e.message}'.";
+    }
+
+    setState(() {
+      _batteryLevel = batteryLevel;
+    });
+  }
+  
+  int _counter = 0;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: LayoutBuilder(builder: (context, constraints) {
-      if (constraints.maxWidth <= 600) {
-        return Column(
-          children: <Widget>[
-            Expanded(
-                flex: 1,
-                child: Container(
-                  alignment: Alignment.center,
-                  width: MediaQuery.of(context).size.width,
-                  margin: const EdgeInsets.all(8.0),
-                  color: Colors.white,
-                  child: Image.asset('/images/Image_Logo02.png'),
-                )),
-            Expanded(
-              flex: 4,
-              child: ListView(
-                physics: const AlwaysScrollableScrollPhysics(),
-                // This next line does the trick.
-                scrollDirection: Axis.horizontal,
-                children: List.generate(
-                  8,
-                  (index) {
-                    return Container(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: Image.asset('/images/0322title.jpg')));
-                  },
-                ),
-              ),
-            ),
-            const Expanded(
-                flex: 10,
-                child: Expanded(flex: 10, child: ProductListMobilePage())),
-          ],
-        );
-      } else {
-        return Center(
-          child: Column(
-            children: <Widget>[
-              Expanded(
-                  flex: 1,
-                  child: Container(
-                    alignment: Alignment.center,
-                    width: MediaQuery.of(context).size.width,
-                    margin: const EdgeInsets.all(8.0),
-                    color: Colors.white,
-                    child: Image.asset('/images/Image_Logo02.png'),
-                  )),
-              Expanded(
-                flex: 3,
-                child: ListView(
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  // This next line does the trick.
-                  scrollDirection: Axis.horizontal,
-                  children: List.generate(
-                    8,
-                    (index) {
-                      return Container(
-                          padding: const EdgeInsets.all(8.0),
-                          child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
-                              child: Image.asset('/images/0322title.jpg')));
-                    },
-                  ),
-                ),
-              ),
-              Expanded(
-                  flex: 1,
-                  child: Row(children: [
-                    Expanded(
-                        child: TextButton(
-                      onPressed: () => {},
-                      style: TextButton.styleFrom(
-                        side: const BorderSide(width: 0, color: Colors.white),
-                        foregroundColor: const Color.fromARGB(255, 0, 0, 0),
-                      ),
-                      child: const Text('女裝'),
-                    )),
-                    Expanded(
-                        child: TextButton(
-                      onPressed: () => {},
-                      style: TextButton.styleFrom(
-                        side: const BorderSide(width: 0, color: Colors.white),
-                        foregroundColor: const Color.fromARGB(255, 0, 0, 0),
-                      ),
-                      child: const Text('男裝'),
-                    )),
-                    Expanded(
-                        child: TextButton(
-                      onPressed: () => {},
-                      style: TextButton.styleFrom(
-                        side: const BorderSide(width: 0, color: Colors.white),
-                        foregroundColor: const Color.fromARGB(255, 0, 0, 0),
-                      ),
-                      child: const Text('配件'),
-                    )),
-                  ])),
-              Expanded(
-                flex: 10,
-                child: SizedBox(
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Expanded(child: WomenDate()),
-                      Expanded(child: MenDate()),
-                      Expanded(child: AccessoriesDate()),
-                    ],
-                  ),
-                ),
-              ),
-            ],
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+          ElevatedButton(
+            onPressed: _getBatteryLevel,
+            child: const Text('Get Battery Level'),
           ),
-        );
-      }
-    }));
+          Text(_batteryLevel),
+        ],
+        ),
+      ),
+       // This trailing comma makes auto-formatting nicer for build methods.
+    );
   }
 }
