@@ -1,0 +1,41 @@
+1. 引入 Plugin
+2. 新增 Activity 跟 Styles
+
+2-1.
+新增在 Flutter 下面
+        <activity
+          android:name="github.tokenyet.flutter_tappay.TappayActivity"
+          android:theme="@style/AppCompactTheme"
+        >
+        </activity>
+Mainfest 加上 xmlns:tools="http://schemas.android.com/tools"
+Application 加上 tools:replace="android:label" 
+
+2-2. 
+新增於 styles.xml
+    <style name="AppCompactTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    </style>
+
+如果有視覺問題就要自行 Fork 後改 activity_main.xml 畫面
+
+
+Storyboard
+https://github.com/flutter/flutter/issues/50569
+
+//// https://github.com/flutter/flutter/issues/17978
+Framework!
+Here is what I did.
+
+Place myFramework.framework to iOS plugin folder /ios
+ex: myPlugin/ios
+
+Update iOS plugin file: myPlugin/ios/myPlugin.podspec
+Adding
+    s.vendored_frameworks = 'myFramework.framework'
+In Terminal : cd to myPlugin/example/ios
+run command
+
+   pod install``` or  ```pod update
+Now we can find the iOS plugin code by open iOS project (example/ios/Runner.xcworkspace) in XCode and go to
+
+Pods/Development Pods/yourPlugin/../../example/ios/.symlinks/plugins/yourPluginName/ios/Classes
