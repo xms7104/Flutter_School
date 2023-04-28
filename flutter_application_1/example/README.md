@@ -1,6 +1,6 @@
-# flutter_tappay_example
+# tappayflutterplugin_example
 
-Demonstrates how to use the flutter_tappay plugin.
+Demonstrates how to use the tappayflutterplugin plugin.
 
 ## Getting Started
 

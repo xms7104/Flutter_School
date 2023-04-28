@@ -1,7 +1,7 @@
 //
 //  TPDSetup.h
 //
-//  TPDirect iOS SDK - v2.2.4
+//  TPDirect iOS SDK - v2.13.0
 //  Copyright © 2016年 Cherri Tech, Inc. All rights reserved.
 //
 //  Apple Pay Document : https://docs.tappaysdk.com/apple-pay
@@ -39,6 +39,8 @@ typedef NS_ENUM(NSInteger, TPDServerType) {
                        withServerType:(TPDServerType)serverType;
 
 
++ (instancetype _Nonnull)setWithAppId:(int)appId withAppKey:(NSString *_Nonnull)appKey withRBAAppId:(NSString * _Nullable)RBAAppId withRBAAppKey:(NSString * _Nullable)RBAAppKey withServerType:(TPDServerType)serverType;
+
 #pragma mark - Function
 /**
  @return TPDSetup Instance.
@@ -52,29 +54,6 @@ typedef NS_ENUM(NSInteger, TPDServerType) {
  */
 + (NSString *_Nonnull)version;
 
-
-/**
- Please setup Advertising Identifier, to improve the accuracy of fraud detect.
-
- @param IDFA NSString, Advertising Identifier.
- */
--(void)setupIDFA:(NSString *_Nullable)IDFA;
-
-
-/**
- This Method Will Sync to TapPay Server.
- 
- You need to implement this function in AppDelegate.
- */
-- (void)serverSync;
-
-/**
- Call this method to get Fraud Id.
- 
- Pass Fraud Id To Your Server , Use Pay By Token API To Complete transaction.
- 
- @return FraudID
- */
-- (NSString *)getFraudID;
+- (NSString *_Nonnull)getDeviceId;
 
 @end

@@ -1,13 +1,15 @@
 //
 //  TPDCard.h
 //
-//  TPDirect iOS SDK - v2.2.4
+//  TPDirect iOS SDK - v2.13.0
 //  Copyright © 2017年 Cherri Tech, Inc. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
+#import "TPDCard.h"
 
 @class TPDStatus;
+@class TPDCard;
 
 @interface TPDForm : UIView
 
@@ -21,7 +23,6 @@
  */
 + (instancetype)setupWithContainer:(UIView *)view;
 
-
 #pragma mark - Function
 
 /**
@@ -31,7 +32,6 @@
  @return TPDForm Instance
  */
 -(instancetype _Nonnull)onFormUpdated:(void(^_Nonnull)(TPDStatus *_Nonnull status))callback;
-
 
 /**
  Set Error Status TextField TextColor
@@ -85,5 +85,20 @@
  Show Off Keyboard
  */
 - (void)showOffKeyboard;
+
+
+/**
+ Set TPDForm display ccv field.
+
+ @param IsUseCcv BOOL
+ */
+- (void)setIsUsedCcv:(BOOL)IsUseCcv;
+
+/**
+ Get current TPDForm is used ccv status.
+
+ @return isUsedCcv BOOL
+ */
+- (BOOL)getIsUsedCcv;
 
 @end

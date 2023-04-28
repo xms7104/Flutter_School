@@ -2,7 +2,7 @@
 //  TPDStatus.h
 //  TPDirect
 //
-//  TPDirect iOS SDK - v2.2.4
+//  TPDirect iOS SDK - v2.13.0
 //  Created by liaozonglun on 07/07/2017.
 //  Copyright © 2017 tech.cherri. All rights reserved.
 //
@@ -43,5 +43,8 @@ typedef NS_ENUM(NSInteger, FormStatus) {
  @return Bool, error status.
  */
 - (BOOL)isHasAnyError;
+
+
+- (BOOL)isCanGetCCVPrime;
 
 @end

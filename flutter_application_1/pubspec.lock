@@ -54,14 +54,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_application_1:
-    dependency: "direct main"
-    description:
-      name: flutter_application_1
-      sha256: "2a4be8864010740fab7169dff208e09a476937fb4657921c8afeaf8dc411adae"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.2"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -170,4 +162,4 @@ packages:
     version: "2.1.4"
 sdks:
   dart: ">=2.18.0 <3.0.0"
-  flutter: ">=1.17.0"
+  flutter: ">=2.5.0"

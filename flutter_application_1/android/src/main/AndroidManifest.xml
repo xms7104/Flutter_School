@@ -1,3 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="github.tokenyet.flutter_tappay">
+  package="com.tungwang.tappayflutterplugin">
+
+<!--    <application-->
+<!--        xmlns:tools="http://schemas.android.com/tools"-->
+<!--        tools:node="replace"-->
+<!--        />-->
+
 </manifest>
